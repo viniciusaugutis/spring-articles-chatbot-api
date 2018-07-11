@@ -1,4 +1,4 @@
-package com.articles.chatbot.api;
+package com.chatbot.api;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ArticlesChatbotApiApplicationTests {
+public class ChatbotApiApplicationTests {
 
 	@Test
 	public void contextLoads() {

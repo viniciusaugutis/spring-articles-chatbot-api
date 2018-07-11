@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS article (
 	content TEXT NOT NULL,
 	seo_url TEXT,
 	seo_meta_description TEXT,
-	meta JSONB,
+	meta jsonb,
 	created TIMESTAMP DEFAULT current_timestamp,
   	modified TIMESTAMP
 );
