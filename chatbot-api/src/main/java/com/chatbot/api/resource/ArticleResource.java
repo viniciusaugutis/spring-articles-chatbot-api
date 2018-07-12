@@ -19,46 +19,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chatbot.api.model.Question;
-import com.chatbot.api.repository.QuestionRepository;
-import com.chatbot.api.repository.filter.QuestionFilter;
+import com.chatbot.api.model.Article;
+import com.chatbot.api.repository.ArticleRepository;
 
 @RestController
-@RequestMapping("/questions")
-public class QuestionResource {
+@RequestMapping("/articles")
+public class ArticleResource {
 
 	@Autowired
-	private QuestionRepository questionRepository;
+	private ArticleRepository articleRepository;
 
 	@GetMapping
-	public Page<Question> findAll(QuestionFilter questionFilter, Pageable pageable) {
-		if (questionFilter.getQuestionCategoryId() == null) {
-			return questionRepository.findAll(pageable);
-		} else {
-			return questionRepository.findByQuestionCategoryId(questionFilter.getQuestionCategoryId(), pageable);
-		}
+	public Page<Article> findAll(Pageable pageable) {
+		return articleRepository.findAll(pageable);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Question> findById(@PathVariable UUID id) {
-		Question question = questionRepository.findOne(id);
-		if (question != null)
-			return ResponseEntity.ok(question);
+	public ResponseEntity<Article> findById(@PathVariable UUID id) {
+		Article article = articleRepository.findOne(id);
+		if (article != null)
+			return ResponseEntity.ok(article);
 		else
 			return ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	public ResponseEntity<Question> create(@Valid @RequestBody Question question) {
-		Question questionSaved = questionRepository.save(question);
-		return ResponseEntity.status(HttpStatus.CREATED).body(questionSaved);
+	public ResponseEntity<Article> create(@Valid @RequestBody Article article) {
+		Article articleSaved = articleRepository.save(article);
+		return ResponseEntity.status(HttpStatus.CREATED).body(articleSaved);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Question> update(@PathVariable UUID id, @Valid @RequestBody Question question) {
+	public ResponseEntity<Article> update(@PathVariable UUID id, @Valid @RequestBody Article article) {
 		try {
-			Question questionSaved = questionRepository.save(question);
-			return ResponseEntity.ok(questionSaved);
+			Article savedArticle = articleRepository.save(article);
+			return ResponseEntity.ok(savedArticle);
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.notFound().build();
 		}
@@ -67,7 +62,7 @@ public class QuestionResource {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable UUID id) {
 		try {
-			questionRepository.delete(id);
+			articleRepository.delete(id);
 			return ResponseEntity.noContent().build();
 		} catch (EmptyResultDataAccessException e) {
 			return ResponseEntity.notFound().build();

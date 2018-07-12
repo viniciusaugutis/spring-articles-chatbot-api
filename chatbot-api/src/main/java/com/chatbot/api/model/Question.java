@@ -1,18 +1,20 @@
 package com.chatbot.api.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.entendaantes.api.model.AlbumProjectCategory;
 
 @Entity
 @Table(name = "question")
@@ -29,6 +31,11 @@ public class Question {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "question_category_id")
 	private QuestionCategory questionCategory;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "question_keyword", joinColumns = { @JoinColumn(name = "question_id") }, inverseJoinColumns = {
+				@JoinColumn(name = "keyword_id") })
+	private List<Keyword> questionKeywords;
 
 	public Long getId() {
 		return id;
@@ -52,6 +59,14 @@ public class Question {
 
 	public void setQuestionCategory(QuestionCategory questionCategory) {
 		this.questionCategory = questionCategory;
+	}
+
+	public List<Keyword> getQuestionKeywords() {
+		return questionKeywords;
+	}
+
+	public void setQuestionKeywords(List<Keyword> questionKeywords) {
+		this.questionKeywords = questionKeywords;
 	}
 
 	public Question() {
