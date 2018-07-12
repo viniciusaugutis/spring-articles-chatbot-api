@@ -16,7 +16,7 @@ public class Keyword {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty(message = "O nome da palvra-chave é um campo obrigatório")
+	@NotEmpty(message = "O nome da palavra-chave é um campo obrigatório")
 	private String name;
 
 	public Long getId() {

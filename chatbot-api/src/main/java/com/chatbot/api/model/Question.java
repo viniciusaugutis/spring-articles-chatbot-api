@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -36,6 +37,7 @@ public class Question {
 	@JoinTable(name = "question_keyword", joinColumns = { @JoinColumn(name = "question_id") }, inverseJoinColumns = {
 				@JoinColumn(name = "keyword_id") })
 	private List<Keyword> questionKeywords;
+	
 
 	public Long getId() {
 		return id;

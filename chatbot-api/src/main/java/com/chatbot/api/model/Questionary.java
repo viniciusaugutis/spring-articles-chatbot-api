@@ -3,8 +3,10 @@ package com.chatbot.api.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,18 +14,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.chatbot.api.model.json.JsonBinaryType;
 import com.fasterxml.jackson.databind.JsonNode;
 
 
@@ -61,6 +60,9 @@ public class Questionary implements Serializable {
 	@Type(type = "jsonb")
 	@Column(columnDefinition = "jsonb")
 	private JsonNode meta;
+	
+	@OneToMany(mappedBy = "id.questionary", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<QuestionaryQuestion> questionaryQuestions;
 	
 	@PrePersist
 	public void setAttributePrePersist() {
@@ -134,6 +136,14 @@ public class Questionary implements Serializable {
 
 	public void setMeta(JsonNode meta) {
 		this.meta = meta;
+	}
+
+	public List<QuestionaryQuestion> getQuestionaryQuestions() {
+		return questionaryQuestions;
+	}
+
+	public void setQuestionaryQuestions(List<QuestionaryQuestion> questionaryQuestions) {
+		this.questionaryQuestions = questionaryQuestions;
 	}
 
 	@Override
