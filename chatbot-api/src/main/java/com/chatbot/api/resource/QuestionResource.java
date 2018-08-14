@@ -32,10 +32,10 @@ public class QuestionResource {
 
 	@GetMapping
 	public Page<Question> findAll(QuestionFilter questionFilter, Pageable pageable) {
-		if (questionFilter.getQuestionCategoryId() == null) {
+		if (questionFilter.getArticleCategoryId() == null) {
 			return questionRepository.findAll(pageable);
 		} else {
-			return questionRepository.findByQuestionCategoryId(questionFilter.getQuestionCategoryId(), pageable);
+			return questionRepository.findByArticleCategoryId(questionFilter.getArticleCategoryId(), pageable);
 		}
 	}
 
@@ -74,5 +74,5 @@ public class QuestionResource {
 		}
 
 	}
-	
+
 }

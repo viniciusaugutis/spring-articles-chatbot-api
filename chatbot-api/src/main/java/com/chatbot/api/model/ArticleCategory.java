@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "question_category")
-public class QuestionCategory {
+@Table(name = "article_category")
+public class ArticleCategory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class QuestionCategory {
 		this.name = name;
 	}
 
-	public QuestionCategory() {
+	public ArticleCategory() {
 
 	}
 
@@ -56,7 +56,7 @@ public class QuestionCategory {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		QuestionCategory other = (QuestionCategory) obj;
+		ArticleCategory other = (ArticleCategory) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

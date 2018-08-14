@@ -10,6 +10,6 @@ import com.chatbot.api.model.Question;
 
 public interface QuestionRepository extends JpaRepository<Question, UUID> {
 	
-	public Page<Question> findByQuestionCategoryId(Long questionCategoryId, Pageable pageable);
+	public Page<Question> findByArticleCategoryId(Long articleCategoryId, Pageable pageable);
 
 }

@@ -7,11 +7,15 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -53,6 +57,11 @@ public class Article implements Serializable {
 	private LocalDateTime created;
 
 	private LocalDateTime modified;
+	
+	@NotNull(message = "A categoria do artigo é obrigatória")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "article_category_id")
+	private ArticleCategory articleCategory;
 	
 	@PrePersist
 	public void setAttributePrePersist() {
@@ -126,6 +135,14 @@ public class Article implements Serializable {
 
 	public void setModified(LocalDateTime modified) {
 		this.modified = modified;
+	}
+
+	public ArticleCategory getArticleCategory() {
+		return articleCategory;
+	}
+
+	public void setArticleCategory(ArticleCategory articleCategory) {
+		this.articleCategory = articleCategory;
 	}
 
 	@Override

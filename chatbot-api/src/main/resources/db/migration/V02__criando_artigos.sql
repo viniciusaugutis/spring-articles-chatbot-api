@@ -8,5 +8,7 @@ CREATE TABLE IF NOT EXISTS article (
 	seo_meta_description TEXT,
 	meta jsonb,
 	created TIMESTAMP DEFAULT current_timestamp,
-  	modified TIMESTAMP
+  	modified TIMESTAMP,
+  	article_category_id INTEGER NOT NULL,
+  	FOREIGN KEY (article_category_id) REFERENCES article_category(id)
 );

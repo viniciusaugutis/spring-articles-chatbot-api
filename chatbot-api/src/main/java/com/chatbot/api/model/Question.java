@@ -2,6 +2,7 @@ package com.chatbot.api.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,11 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 @Entity
 @Table(name = "question")
@@ -28,16 +31,22 @@ public class Question {
 	@NotEmpty(message = "O nome da categoria de pergunta é um campo obrigatório")
 	private String name;
 	
-	@NotNull(message = "A categoria da pergunta é obrigatória")
+	@NotNull(message = "A categoria do artigo é obrigatória")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "question_category_id")
-	private QuestionCategory questionCategory;
+	@JoinColumn(name = "article_category_id")
+	private ArticleCategory articleCategory;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "question_keyword", joinColumns = { @JoinColumn(name = "question_id") }, inverseJoinColumns = {
 				@JoinColumn(name = "keyword_id") })
 	private List<Keyword> questionKeywords;
 	
+	@Type(type = "jsonb")
+	@Column(columnDefinition = "jsonb")
+	private JsonNode meta;
+	
+	@Column(name = "is_valid")
+	private Boolean isValid;
 
 	public Long getId() {
 		return id;
@@ -55,12 +64,12 @@ public class Question {
 		this.name = name;
 	}
 
-	public QuestionCategory getQuestionCategory() {
-		return questionCategory;
+	public ArticleCategory getArticleCategory() {
+		return articleCategory;
 	}
 
-	public void setQuestionCategory(QuestionCategory questionCategory) {
-		this.questionCategory = questionCategory;
+	public void setArticleCategory(ArticleCategory articleCategory) {
+		this.articleCategory = articleCategory;
 	}
 
 	public List<Keyword> getQuestionKeywords() {
@@ -69,6 +78,22 @@ public class Question {
 
 	public void setQuestionKeywords(List<Keyword> questionKeywords) {
 		this.questionKeywords = questionKeywords;
+	}
+
+	public JsonNode getMeta() {
+		return meta;
+	}
+
+	public void setMeta(JsonNode meta) {
+		this.meta = meta;
+	}
+
+	public Boolean getIsValid() {
+		return isValid;
+	}
+
+	public void setIsValid(Boolean isValid) {
+		this.isValid = isValid;
 	}
 
 	public Question() {
