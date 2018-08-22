@@ -6,10 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.chatbot.api.model.Question;
+import com.chatbot.api.model.Topic;
 
-public interface QuestionRepository extends JpaRepository<Question, UUID> {
-	
-	public Page<Question> findByTopicId(Long topicId, Pageable pageable);
+public interface TopicRepository extends JpaRepository<Topic, UUID> {
+
+	Page<Topic> findByArticleCategoryId(Long articleCategoryId, Pageable pageable);
 
 }

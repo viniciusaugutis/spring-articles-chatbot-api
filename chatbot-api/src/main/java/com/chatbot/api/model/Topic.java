@@ -1,5 +1,7 @@
 package com.chatbot.api.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -17,27 +21,31 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.databind.JsonNode;
 
 @Entity
-@Table(name = "question")
-public class Question {
+@Table(name = "topic")
+public class Topic {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty(message = "O nome da categoria de pergunta é um campo obrigatório")
+	@NotEmpty(message = "O nome do cenário é um campo obrigatório")
 	private String name;
 	
-	@NotNull(message = "O tema da pergunta é obrigatório")
+	private String description;
+	
+	@NotNull(message = "A categoria do artigo é obrigatória")
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "topic_id")
-	private Topic topic;
+	@JoinColumn(name = "article_category_id")
+	private ArticleCategory articleCategory;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "topic_keyword", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = {
+				@JoinColumn(name = "keyword_id") })
+	private List<Keyword> topicKeywords;
 	
 	@Type(type = "jsonb")
 	@Column(columnDefinition = "jsonb")
 	private JsonNode meta;
-	
-	@Column(name = "is_valid")
-	private Boolean isValid;
 
 	public Long getId() {
 		return id;
@@ -55,12 +63,12 @@ public class Question {
 		this.name = name;
 	}
 
-	public Topic getTopic() {
-		return topic;
+	public ArticleCategory getArticleCategory() {
+		return articleCategory;
 	}
 
-	public void setTopic(Topic topic) {
-		this.topic = topic;
+	public void setArticleCategory(ArticleCategory articleCategory) {
+		this.articleCategory = articleCategory;
 	}
 
 	public JsonNode getMeta() {
@@ -71,15 +79,23 @@ public class Question {
 		this.meta = meta;
 	}
 
-	public Boolean getIsValid() {
-		return isValid;
+	public List<Keyword> getTopicKeywords() {
+		return topicKeywords;
 	}
 
-	public void setIsValid(Boolean isValid) {
-		this.isValid = isValid;
+	public void setTopicKeywords(List<Keyword> topicKeywords) {
+		this.topicKeywords = topicKeywords;
 	}
 
-	public Question() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Topic() {
 
 	}
 
@@ -88,7 +104,6 @@ public class Question {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -100,16 +115,11 @@ public class Question {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Question other = (Question) obj;
+		Topic other = (Topic) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

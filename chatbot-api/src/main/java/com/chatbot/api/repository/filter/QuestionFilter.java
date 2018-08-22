@@ -4,6 +4,8 @@ public class QuestionFilter {
 	
 	private Long articleCategoryId;
 	
+	private Long topicId;
+	
 	private Boolean isValid;
 
 	public Long getArticleCategoryId() {
@@ -12,6 +14,14 @@ public class QuestionFilter {
 
 	public void setArticleCategoryId(Long articleCategoryId) {
 		this.articleCategoryId = articleCategoryId;
+	}
+
+	public Long getTopicId() {
+		return topicId;
+	}
+
+	public void setTopicId(Long topicId) {
+		this.topicId = topicId;
 	}
 
 	public Boolean getIsValid() {
