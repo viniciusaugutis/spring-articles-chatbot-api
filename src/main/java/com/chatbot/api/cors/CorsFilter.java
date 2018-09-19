@@ -36,7 +36,7 @@ public class CorsFilter implements Filter{
 		response.setHeader("Access-Control-Allow-Origin", chatbotApiProperty.getOriginPermited());
         response.setHeader("Access-Control-Allow-Credentials", "true");
 		
-		if ("OPTIONS".equals(request.getMethod()) && "http://localhost:4200".equals(request.getHeader("Origin"))) {
+		if ("OPTIONS".equals(request.getMethod()) && chatbotApiProperty.getOriginPermited().equals(request.getHeader("Origin"))) {
 			response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS, PATCH");
         	response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
         	response.setHeader("Access-Control-Max-Age", "3600");
