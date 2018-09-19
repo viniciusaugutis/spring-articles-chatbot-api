@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("chatbot")
 public class ChatbotApiProperty {
 
-	private String originPermited = "http://localhost:4200";
+	private String originPermited;
 
 	public String getOriginPermited() {
 		return originPermited;
