@@ -5,7 +5,7 @@ INSERT INTO topic (name, description, meta, article_category_id) VALUES
 ('Projeto de arquitetura e custos', 'Projeto de arquitetura e custos', null, 1),
 ('Projetos de interiores', 'Projetos de interiores e decoração clean', null, 2),
 ('Banheiro, spa e ofurôs', 'Banheiro, spa e ofurôs', null, 2),
-('Focos e sancas de gesso', 'Focos e sancas de gesso', null, 2),
+('Forros e sancas de gesso', 'Forros e sancas de gesso', null, 2),
 ('Ambientes comerciais', 'Decoração em ambientes comerciais', null, 2),
 ('Home office', 'Decoração em espaços home office', null, 2),
 ('Design de interiores', 'Design de interiores e decoração de ambientes', null, 2),
