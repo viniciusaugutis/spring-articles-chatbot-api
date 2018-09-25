@@ -1,16 +1,17 @@
 INSERT INTO topic (name, description, meta, article_category_id) VALUES 
-('projeto de interiores', 'projeto de interiores descrição', null, 2),
-('banheira, spa e ofurô', 'banheiro, spa e ufurô descrição', null, 2);
-
-INSERT INTO question (name, is_valid, meta, topic_id) VALUES
-('Por que é tão importante um projeto de interiores?', 'true', null, 1),
-('Estilo de decoração clean, quando e como surgiu?', 'true', null, 1),
-('Quais são as características de estilo de decoração clean?', 'true', null, 1),
-('Quais cuidados tomar ao escolher o estilo de decoração clean?', 'true', null, 1);
-
-INSERT INTO question (name, is_valid, meta, topic_id) VALUES
-('Vale a pena ter uma banheira em casa?', 'true', null, 2),
-('Qual a diferença entre banheira, spa e ofurô?', 'true', null, 2),
-('Como escolher a ideal e o que devo levar em consideração?', 'true', null, 2),
-('Como são instaladas?', 'true', null, 2),
-('Como é a manutenção desses equipamentos? ', 'true', null, 2);
+('Arquitetura e conceitos fundamentais', 'A importância da arquitetura e conceitos fundamentais', null, 1),
+('Arquitetos e contratação', 'Análise e contratação de arquitetos', null, 1),
+('Planejamento de obras', 'Planejamento de obras', null, 1),
+('Projeto de arquitetura e custos', 'Projeto de arquitetura e custos', null, 1),
+('Projetos de interiores', 'Projetos de interiores e decoração clean', null, 2),
+('Banheiro, spa e ofurôs', 'Banheiro, spa e ofurôs', null, 2),
+('Focos e sancas de gesso', 'Focos e sancas de gesso', null, 2),
+('Ambientes comerciais', 'Decoração em ambientes comerciais', null, 2),
+('Home office', 'Decoração em espaços home office', null, 2),
+('Design de interiores', 'Design de interiores e decoração de ambientes', null, 2),
+('Energia solar', 'Energia solar e sustentabilidade', null, 3),
+('Sustentabilidade', 'Decoração sustentável', null, 3),
+('Cisterna', 'Cisterna e sustentabilidade', null, 3),
+('Jardins', 'Jardins e iluminação', null, 4),
+('Lagos artificiais', 'Lagos artificiais', null, 4),
+('Jardins de inverno', 'Jardins de inverno', null, 4);
